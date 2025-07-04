@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Horolezeni.Views"
+             xmlns:viewmodels="clr-namespace:Horolezeni.ViewModels"
+             x:Class="Horolezeni.Views.AkceFormPage"
+             x:DataType="viewmodels:AkceFormViewModel"
+             Title="{Binding PageTitle}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" IsVisible="{Binding IsInitialized}">
+
+            <Label Text="Název akce" />
+            <Entry Text="{Binding CurrentAkce.Action}" Placeholder="Zadejte název akce" />
+
+            <Label Text="Začátek" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <DatePicker Grid.Column="0" Date="{Binding StartDate}" />
+                <TimePicker Grid.Column="1" Time="{Binding StartTime}" />
+            </Grid>
+
+            <Label Text="Konec" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <DatePicker Grid.Column="0" Date="{Binding EndDate}" />
+                <TimePicker Grid.Column="1" Time="{Binding EndTime}" />
+            </Grid>
+
+            <Label Text="Typ akce" />
+            <Picker ItemsSource="{Binding AkceTypes}" SelectedItem="{Binding CurrentAkce.Type}" Title="Vyberte typ akce" />
+
+            <Label Text="Popis" />
+            <Editor Text="{Binding CurrentAkce.Description}" Placeholder="Podrobný popis akce" AutoSize="TextChanges" HeightRequest="100"/>
+
+            <Label Text="Materiál" />
+            <Editor Text="{Binding CurrentAkce.Material}" Placeholder="Potřebné vybavení, lana, atd." AutoSize="TextChanges" HeightRequest="80"/>
+
+            <Label Text="Doprava" />
+            <Editor Text="{Binding CurrentAkce.Transportation}" Placeholder="Informace o dopravě, srazu, autech" AutoSize="TextChanges" HeightRequest="80"/>
+
+            <Label Text="Účastníci" />
+            <Editor Text="{Binding CurrentAkce.Participate}" Placeholder="Seznam přihlášených, kontakty" AutoSize="TextChanges" HeightRequest="80"/>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
+                <Button Grid.Column="0" Text="Uložit" Command="{Binding SaveCommand}" />
+                <Button Grid.Column="1" Text="Zrušit" Command="{Binding CancelCommand}" Style="{StaticResource DestructiveButton}" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

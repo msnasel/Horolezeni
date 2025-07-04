@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "527456380369",
+    "firebase_url": "https://horolezeni-7e74b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "horolezeni-7e74b",
+    "storage_bucket": "horolezeni-7e74b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527456380369:android:418aa15f41c9621a5f2cf0",
+        "android_client_info": {
+          "package_name": "com.companyname.horolezeni"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgVQy4PupEabfDnnvVtj9MnF4Sa5COYUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

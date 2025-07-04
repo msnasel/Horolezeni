@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Horolezeni.Models"
+             xmlns:ViewModels="clr-namespace:Horolezeni.ViewModels"
+             xmlns:converters="clr-namespace:Horolezeni.Converters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Horolezeni.Views.AkcePage"
+             x:DataType="ViewModels:AkceViewModel"
+             Title="Seznam akcí">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*, Auto">
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0"/>
+
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding AkceList}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedAkce}"
+                        IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                        EmptyView="Žádné akce nebyly nalezeny.">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Akce">
+                    <Border Margin="10,5" Padding="10" StrokeThickness="1" Stroke="LightGray">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="{Binding Action}" FontSize="Large" FontAttributes="Bold" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                                <Label Text="{Binding Start, StringFormat='{0:dd.MM.yyyy HH:mm}'}" FontSize="Small" TextColor="DarkGray"/>
+                            </VerticalStackLayout>
+
+                            <!-- OPRAVA: Label se nyní váže na CalculatedStatus a používá konvertor pro barvu -->
+                            <Label Grid.Column="1" 
+                                   Text="{Binding CalculatedStatus}" 
+                                   TextColor="{Binding CalculatedStatus, Converter={StaticResource StatusToColorConverter}}"
+                                   VerticalOptions="Center" 
+                                   FontAttributes="Bold"/>
+                            
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="1" Text="Přidat akci" Command="{Binding GoToAddCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" Margin="20" CornerRadius="25" HeightRequest="50"/>
+    </Grid>
+
+</ContentPage>

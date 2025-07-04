@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Horolezeni.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:Views="clr-namespace:Horolezeni.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Title="Horolezeni">
+
+    <ShellContent
+        Title="Plán akcí"
+        Icon="{StaticResource IconActionPlan}"
+        ContentTemplate="{DataTemplate Views:AkceView}"
+        Route="actionplan" />
+
+    <ShellContent
+        Title="Fotky"
+        Icon="{StaticResource IconCamera}"
+        ContentTemplate="{DataTemplate Views:PhotosView}"
+        Route="photos" />
+
+    <ShellContent
+        Title="Kalendář"
+        Icon="{StaticResource IconCalendar}"
+        ContentTemplate="{DataTemplate Views:CalendarView}"
+        Route="calendar" />
+
+    <ShellContent
+        Title="Odkazy"
+        Icon="{StaticResource IconLink}"
+        ContentTemplate="{DataTemplate Views:LinksView}"
+        Route="links" />
+
+    <ShellContent
+        Title="Novinky"
+        Icon="{StaticResource IconNews}"
+        ContentTemplate="{DataTemplate Views:NewsView}"
+        Route="news" />
+
+    <ShellContent
+        Title="Chat"
+        Icon="{StaticResource IconChat}"
+        ContentTemplate="{DataTemplate Views:ChatView}"
+        Route="chat" />
+
+    <ShellContent
+        Title="Info"
+        Icon="{StaticResource IconInfo}"
+        ContentTemplate="{DataTemplate Views:InfoView}"
+        Route="info" />
+
+    <Shell.FlyoutFooter>
+        <Grid Padding="15">
+            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 
+                VerticalOptions="Center" HorizontalOptions="Center" SelectionChanged="SfSegmentedControl_SelectionChanged"
+                SegmentWidth="40" SegmentHeight="40">
+                <sf:SfSegmentedControl.ItemsSource>
+                    <x:Array Type="{x:Type sf:SfSegmentItem}">
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconLight}"/>
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconDark}"/>
+                    </x:Array>
+                </sf:SfSegmentedControl.ItemsSource>
+            </sf:SfSegmentedControl>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>
